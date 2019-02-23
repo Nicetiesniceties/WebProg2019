@@ -1,0 +1,217 @@
+html,
+body,
+/* funki dori */
+@font-face {
+  font-family: 'funki_dori';
+  font-style: normal;
+  font-weight: 100;
+  src:  local('UVF Funkidori Regular'), local('funki_dori'), url('fonts/funki_dori.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'funki_dori';
+  font-style: normal;
+  font-weight: 100;
+  src:  local('UVF Funkidori Regular'), local('funki_dori'), url('fonts/funki_dori.ttf') format('truetype');
+}
+
+/* funki_dori Bold */
+/*@font-face {
+  font-family: 'funki_dori_bold';
+  font-style: normal;
+  font-weight: 700;
+  src:  local('UVF Funkidori Regular'), local('funki_dori'), url('fonts/funki_dori.ttf') format('truetype');
+}*/
+
+
+body {
+ font-family: 'funki_dori'; 
+ background: #FDF9EE; 
+ margin: 20%;
+  /*Please set this background color as close to the background image as possible.
+  titlebar for seamless window on macOS will use this background color. 
+  typora for Win/Linux will use this to judge whether typora is in dark mode or light mode*/
+}
+#write{
+	background: #FDF9EE;
+	font-family: 'funki_dori';
+	font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	color: #111;
+	font-family: 'funki_dori';
+}
+
+html {
+	font-size:20px;
+}
+
+#write {
+	max-width: 914px;
+	text-align: justify;
+}
+
+#write>h1:first-child {
+	margin-top: 2.75rem;
+}
+#write>h2:first-child {
+	margin-top: 1.75rem;
+}
+#write>h3:first-child {
+	margin-top: 1rem;
+}
+#write>h4:first-child {
+	margin-top: 0.5rem;
+}
+h1 {
+	color: #49200E;
+	font-weight: normal;
+	line-height: 4rem;
+	margin: 0 0 1.75rem;
+	padding: 20px 30px;
+	text-align: center;
+	/*text-transform: uppercase;*/
+	margin-top: 4rem;
+	font-size: 4.0rem;
+}
+h2 {
+	color: #49200E;
+	font-weight: normal;
+	line-height: 3rem;
+	margin: 0 0 1.9375rem;
+	padding: 0 30px;
+	text-align: center;
+	/*text-transform: uppercase;*/
+	margin-top: 3rem;
+	font-size: 3.0rem;
+}
+h3 {
+	color: #49200E;
+	font-weight: normal;
+	font-size: 2.5rem;
+	text-align: center;
+}
+h4 {
+	color: #CB7027;
+	font-weight: normal;
+	font-size: 2.0rem;
+	text-align: center;
+}
+h5 {
+	color: #CB7027;
+	font-size: 1.125rem;
+	font-weight: normal;
+	font-size: 1.8rem;
+	text-align: center;
+}
+h6 {
+	color: #34382A;
+	font-size: 1rem;
+	font-weight: bold;
+	font-size: 1.6rem;
+	text-align: center;
+}
+p {
+	color: #34382A;
+	line-height: 1.75rem;
+	margin: 0 0 1.25rem;
+	font-size: 1.6rem;
+}
+ul, ol {
+	color: #000000;
+	line-height: 1.75rem;
+	margin: 0 0 1.25rem;
+	font-size: 1.6rem;
+}
+
+a {
+	color: #C43549;
+	text-decoration: none;
+	line-height: 1.75rem;
+	margin: 0 0 1.25rem;
+	font-size: 1.6rem;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+table {
+	margin-bottom: 20px;
+	border-top: 2px solid #34382A;
+	border-bottom: 2px solid #34382A;
+	border: 2px solid #34382A;
+	margin-left: auto;
+	margin-right: auto;
+}
+table th,
+table td,
+table caption{
+	padding: 8px;
+	line-height: 1.25rem;
+	vertical-align: top;
+	border: 2px solid #34382A;
+	font-size: 1.4rem;
+}
+table th {
+	font-weight: bold;
+	font-size: 1.4rem;
+}
+table thead th {
+	vertical-align: bottom;
+	font-size: 1.4rem;
+}
+
+
+q {
+	margin: 10 10 10rem;
+	padding: 0.5rem 1.11111rem 0 1.05556rem;
+	text-align: center;
+	line-height: 30rem;
+	font-size: 1.6rem;
+	line-height: 1.6;
+	color: #AB7279;
+	margin-left: auto;
+	margin-right: auto;
+}
+span, div
+{
+	line-height: 3rem;
+	border: 2px dashed #CB7027;
+	margin: 0 0 1.25rem;
+	font-size: 1.6rem;
+	padding: 0.3rem;
+}
+
+mark {
+	background: #52AB8F;
+	/*color: #34382A;*/
+}
+hr { 
+    display: block;
+    border-style: dashed;
+    border-width: 2px;
+	color: #34382A;
+}
+
+img{
+	border: 3px dashed #000000;
+	padding: 0.5rem;
+	border-radius:50%;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50%;
+	display: block;
+}
+input[type=text] {
+	float: center;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	border-bottom: 3px solid black;
+	 font-size:14pt;
+}
