@@ -87,4 +87,3 @@ function check_box_switch()
 {
 	var checked_status;
 }
-
