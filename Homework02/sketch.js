@@ -3,8 +3,9 @@ let bgImg, baseImg, msgImg, bluebird_upflap_Img, gameoverImg;
 let bg_x1, bg_x2, random1, random2;
 let x1, y1, g = 12 / 60, tapA = -4, delta_triAng = 0.015;
 let vScroll, SecCounter = 0;
-let GameOverFlag = false, GameStartFlag = false;
+let GameOverFlag = false, GameStartFlag = false, hitSoundFlag = false;
 let gapWidth = 120, gameSpeed = 4, difficulty_seed = 0.6;
+var wingSound, hitSound, dieSound, pointSound;
 // assets from: https://github.com/sourabhv/FlapPyBird/tree/master/assets
 
 function preload() {
@@ -17,6 +18,10 @@ function preload() {
 	bluebird_upflap_Img = loadImage("assets/sprites/bluebird-upflap.png");
 	bluebird_midflap_Img = loadImage("assets/sprites/bluebird-midflap.png");
 	bluebird_downflap_Img = loadImage("assets/sprites/bluebird-downflap.png");
+	wingSound = loadSound("assets/audio/wing.wav");
+	pointSound = loadSound("assets/audio/point.wav");
+	dieSound = loadSound("assets/audio/die.wav");
+	hitSound = loadSound("assets/audio/hit.wav");
 }
 
 function setup() {
@@ -57,7 +62,14 @@ function draw() {
 	background(0);
 	//for game over
 	if(y1 > baseHeight)
+	{
+		if(!hitSoundFlag)
+		{
+			hitSound.play();
+			hitSoundFlag = true;
+		}
 		GameOverFlag = true;
+	}
 	if(GameOverFlag)
 	{
 		vScroll = 0;
@@ -96,10 +108,6 @@ function draw() {
 	}
 	image(baseImg, bg_x1, baseHeight, width, baseImg.height * baseScale);
 	image(baseImg, bg_x2, baseHeight, width, baseImg.height * baseScale);
-	if(GameOverFlag)
-		image(gameoverImg, (width - width / 1.3) / 2, 0.3 * height
-		  , width / 1.3, width / 1.3 / gameoverImg.width * gameoverImg.height);
-	
 	if(!GameStartFlag)
 	{
 		image(msgImg, (width - width / 1.3) / 2, 0.1 * height
@@ -126,10 +134,24 @@ function draw() {
 		//gameover flag
 		
 		if( x1 > bg_x1 && x1 < bg_x1 + up_pipeImg.width && (y1 - triH - bluebird_midflap_Img.height / 2 < up_pipeImg.height + random1 ||  y1 - triH + bluebird_midflap_Img.height > up_pipeImg.height + random1 + gapWidth))
+		{
+			if(!hitSoundFlag)
+			{
+				hitSound.play();
+				hitSoundFlag = true;
+			}
 			GameOverFlag = true
+		}
 		if( x1 > bg_x2 && x1 < bg_x2 + up_pipeImg.width && (y1 - triH - bluebird_midflap_Img.height / 2 < up_pipeImg.height + random2 ||  y1 - triH + bluebird_midflap_Img.height > up_pipeImg.height + random2 + gapWidth))
+		{
+			if(!hitSoundFlag)
+			{
+				hitSound.play();
+				hitSoundFlag = true;
+			}
 			GameOverFlag = true
-		
+		}
+
 		//image(bluebird_upflap_Img, 0, -triH, triW, triH);
 		if(SecCounter % (3 * gameSpeed) < gameSpeed)
 			image(bluebird_upflap_Img, 0, -triH, triW, triH);
@@ -140,12 +162,21 @@ function draw() {
 		SecCounter++;
 
 	}
+	if(GameOverFlag)
+	{
+		rotate(-triAng);
+		translate(-x1, -y1);
+		image(gameoverImg, (width - width / 1.3) / 2, 0.3 * height
+		  , width / 1.3, width / 1.3 / gameoverImg.width * gameoverImg.height);
+	}
+
 }
 
 function keyPressed() {
 	if(keyCode === 32 && !GameOverFlag)
 	{
 		GameStartFlag = true;
+		wingSound.play();
 		vy = tapA;
 		triAng = -PI / 4;
 		SecCounter = 0;
