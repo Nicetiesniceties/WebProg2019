@@ -63,6 +63,9 @@ function draw() {
 	//for game over
 	if(y1 > baseHeight)
 	{
+		delta_triAng = 0;
+		vy = 0;
+		g = 0;
 		if(!hitSoundFlag)
 		{
 			hitSound.play();
@@ -73,9 +76,6 @@ function draw() {
 	if(GameOverFlag)
 	{
 		vScroll = 0;
-		vy = 0;
-		g = 0;
-		delta_triAng = 0;
 		SecCounter = 0;
 	}
 	//scrolling the background
@@ -84,22 +84,21 @@ function draw() {
 	if(bg_x1 <= -width)
 	{
 		bg_x1 = width;
-		random1 = Math.random() * difficulty_seed * width;
-		if(up_pipeImg.height + gapWidth + random1 > baseHeight)
+		random1 = (0.5 - Math.random()) * 2 * difficulty_seed * width;
+		if(up_pipeImg.height + gapWidth + random1 > baseHeight ||  up_pipeImg.height + gapWidth + random1 + low_pipeImg.height < baseHeight)
 			random1 = 0;
 	}
 	if(bg_x2 <= -width)
 	{
 		bg_x2 = width;
-		random2 = Math.random() * difficulty_seed * width;
-		if(up_pipeImg.height + gapWidth + random2 > baseHeight)
+		random2 = (0.5 - Math.random()) * 2 * difficulty_seed * width;
+		if(up_pipeImg.height + gapWidth + random2 > baseHeight || up_pipeImg.height + gapWidth + random2 + low_pipeImg.height < baseHeight)
 			random2 = 0;
 	}
 	image(bgImg, bg_x1, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
 	image(bgImg, bg_x2, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
 	if(GameStartFlag)
 	{
-		console.log(random1);
 		//draw the pipes!
 		image(up_pipeImg, bg_x1, 0, up_pipeImg.width, random1 + up_pipeImg.height);
 		image(low_pipeImg, bg_x1, up_pipeImg.height + gapWidth + random1);
@@ -110,7 +109,7 @@ function draw() {
 	image(baseImg, bg_x2, baseHeight, width, baseImg.height * baseScale);
 	if(!GameStartFlag)
 	{
-		image(msgImg, (width - width / 1.3) / 2, 0.1 * height
+		image(msgImg, (width - width / 1.3) / 2, 0.125 * height
 		  , width / 1.3, msgImg.height * msgScale / 1.3);
 		translate(x1, y1);
 		if(SecCounter % (3 * gameSpeed) < gameSpeed)
