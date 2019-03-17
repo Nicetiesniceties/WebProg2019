@@ -174,7 +174,11 @@ function draw() {
 function keyPressed() {
 	if(keyCode === 32 && !GameOverFlag)
 	{
-		GameStartFlag = true;
+		if(!GameStartFlag)
+		{
+			GameStartFlag = true;
+			random1 = random2 = 0;
+		}
 		wingSound.play();
 		vy = tapA;
 		triAng = -PI / 4;
