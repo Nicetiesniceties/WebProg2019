@@ -49,7 +49,7 @@ if __name__ == "__main__":
     import os
     import SocketServer
 
-    PORT = 8000
+    PORT = 8001
 
     Handler = CORSHTTPRequestHandler
     #Handler = SimpleHTTPServer.SimpleHTTPRequestHandler

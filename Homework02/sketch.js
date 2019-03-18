@@ -74,7 +74,7 @@ function draw() {
 	// Render function (called per frame.)
 	background(0);
 	//for game over
-	if(y1 > baseHeight)
+	if(y1 > baseHeight || y1 < 0)
 	{
 		delta_triAng = 0;
 		vy = 0;
