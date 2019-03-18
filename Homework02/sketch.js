@@ -1,8 +1,8 @@
 let cvsWrapper = null;
 let bgImg, baseImg, msgImg, bluebird_upflap_Img, gameoverImg;
-let bg_x1, bg_x2, random1, random2;
+let bg_x1, bg_x2, random1, random2, real_bg_x1, real_bg_x2;
 let x1, y1, g = 12 / 60, tapA = -4, delta_triAng = 0.015;
-let vScroll, SecCounter = 0;
+let vScroll = 3, SecCounter = 0;
 let GameOverFlag = false, GameStartFlag = false, hitSoundFlag = false, pipe1_flag = true, pipe2_flag = false, GLOBAL_SWITCH_BIRD_FLAG = false;
 let GLOBAL_POINT_COUNTER = 0, GLOBAL_SWITCH_BIRD_INDEX = 0;
 let gapWidth = 120, gameSpeed = 4, difficulty_seed = 0.6;
@@ -51,7 +51,7 @@ function setup() {
 	bgScale = width / bgImg.width;
 	baseScale = width / baseImg.width;
 	baseHeight = height * 0.85;
-	bg_x1 = 0, bg_x2 = width, vScroll = 3;
+	bg_x1 = 0, real_bg_x1 = 0, real_bg_x2 = width, bg_x2 = width;
 	random1 = 0; 
 	random2 = 0;
 
@@ -93,7 +93,13 @@ function draw() {
 	//scrolling the background
 	bg_x1 -= vScroll;
 	bg_x2 -= vScroll;
+	real_bg_x1 -= 0.3 * vScroll;
+	real_bg_x2 -= 0.3 * vScroll;
 	//re-generate the background!
+	if(real_bg_x1 < -width)
+		real_bg_x1 = width
+	if(real_bg_x2 < -width)
+		real_bg_x2 = width
 	if(bg_x1 <= -width)
 	{
 		pipe1_flag = false;
@@ -112,8 +118,8 @@ function draw() {
 	}
 	if(GLOBAL_POINT_COUNTER % 10 < 5)
 	{
-		image(bgImg, bg_x1, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
-		image(bgImg, bg_x2, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
+		image(bgImg, real_bg_x1, 0,  width + 3,  bgImg.height * bgScale);
+		image(bgImg, real_bg_x2, 0,  width + 3,  bgImg.height * bgScale);
 		if(!GLOBAL_SWITCH_BIRD_FLAG)
 		{
 			GLOBAL_SWITCH_BIRD_INDEX = (GLOBAL_SWITCH_BIRD_INDEX  + 1) % 3;
@@ -123,8 +129,8 @@ function draw() {
 	else
 	{
 		GLOBAL_SWITCH_BIRD_FLAG = false;
-		image(bgImg_night, bg_x1, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
-		image(bgImg_night, bg_x2, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
+		image(bgImg_night, real_bg_x1, 0,  width + 3,  bgImg.height * bgScale);
+		image(bgImg_night, real_bg_x2, 0,  width + 3,  bgImg.height * bgScale);
 	}
 	
 	//image(numImgs, 0, 0);//testing
@@ -231,6 +237,37 @@ function keyPressed() {
 		wingSound.play();
 		vy = tapA;
 		triAng = -PI / 4;
+		SecCounter = 0;
+	}
+	if(keyCode === 32 && GameOverFlag)
+	{
+		GameOverFlag = false, GameStartFlag = false;
+			// setup code below
+		//bg setup
+		bgScale = width / bgImg.width;
+		baseScale = width / baseImg.width;
+		baseHeight = height * 0.85;
+		bg_x1 = 0, real_bg_x1 = 0, real_bg_x2 = width, bg_x2 = width;
+		random1 = 0; 
+		random2 = 0;
+	
+		//message setup
+		msgScale = width / msgImg.width;
+	
+		//birds setup
+		triW = 50;
+		triH = 40;
+		vx = 0;
+		vy = 0;
+		triAng = 0;
+		x1 = width / 2 - triW / 2;
+		y1 = height / 2 - triH / 2 + 0.1 * height;
+		vScroll = 3;
+
+		delta_triAng = 0.015;
+		g = 12 / 60;
+		hitSoundFlag = false;
+		GLOBAL_POINT_COUNTER = 0;
 		SecCounter = 0;
 	}
 }
