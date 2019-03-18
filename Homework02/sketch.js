@@ -3,10 +3,10 @@ let bgImg, baseImg, msgImg, bluebird_upflap_Img, gameoverImg;
 let bg_x1, bg_x2, random1, random2;
 let x1, y1, g = 12 / 60, tapA = -4, delta_triAng = 0.015;
 let vScroll, SecCounter = 0;
-let GameOverFlag = false, GameStartFlag = false, hitSoundFlag = false, pipe1_flag = true, pipe2_flag = false;
-let GLOBAL_POINT_COUNTER = 0;
+let GameOverFlag = false, GameStartFlag = false, hitSoundFlag = false, pipe1_flag = true, pipe2_flag = false, GLOBAL_SWITCH_BIRD_FLAG = false;
+let GLOBAL_POINT_COUNTER = 0, GLOBAL_SWITCH_BIRD_INDEX = 0;
 let gapWidth = 120, gameSpeed = 4, difficulty_seed = 0.6;
-var numImgs = [];
+var numImgs = [], upflap_Imgs = [], midflap_Imgs = [], downflap_Imgs = [];
 var wingSound, hitSound, dieSound, pointSound;
 // assets from: https://github.com/sourabhv/FlapPyBird/tree/master/assets
 
@@ -21,6 +21,13 @@ function preload() {
 	bluebird_upflap_Img = loadImage("assets/sprites/bluebird-upflap.png");
 	bluebird_midflap_Img = loadImage("assets/sprites/bluebird-midflap.png");
 	bluebird_downflap_Img = loadImage("assets/sprites/bluebird-downflap.png");
+	var color = ["redbird", "bluebird", "yellowbird"];
+	for(var i = 0; i < 3; i++)
+	{
+		upflap_Imgs[i] = loadImage(`assets/sprites/${color[i]}-upflap.png`);
+		midflap_Imgs[i] = loadImage(`assets/sprites/${color[i]}-midflap.png`);
+		downflap_Imgs[i] = loadImage(`assets/sprites/${color[i]}-downflap.png`);
+	}
 	wingSound = loadSound("assets/audio/wing.wav");
 	pointSound = loadSound("assets/audio/point.wav");
 	dieSound = loadSound("assets/audio/die.wav");
@@ -107,9 +114,15 @@ function draw() {
 	{
 		image(bgImg, bg_x1, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
 		image(bgImg, bg_x2, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
+		if(!GLOBAL_SWITCH_BIRD_FLAG)
+		{
+			GLOBAL_SWITCH_BIRD_INDEX = (GLOBAL_SWITCH_BIRD_INDEX  + 1) % 3;
+			GLOBAL_SWITCH_BIRD_FLAG = true;
+		}
 	}
 	else
 	{
+		GLOBAL_SWITCH_BIRD_FLAG = false;
 		image(bgImg_night, bg_x1, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
 		image(bgImg_night, bg_x2, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
 	}
@@ -131,11 +144,11 @@ function draw() {
 		  , width / 1.3, msgImg.height * msgScale / 1.3);
 		translate(x1, y1);
 		if(SecCounter % (3 * gameSpeed) < gameSpeed)
-			image(bluebird_upflap_Img, 0, -triH, triW, triH);
+			image(upflap_Imgs[GLOBAL_SWITCH_BIRD_INDEX], 0, -triH, triW, triH);
 		else if(SecCounter % (3 * gameSpeed) < 2 * gameSpeed)
-			image(bluebird_midflap_Img, 0, -triH, triW, triH);
+			image(midflap_Imgs[GLOBAL_SWITCH_BIRD_INDEX], 0, -triH, triW, triH);
 		else
-			image(bluebird_downflap_Img, 0, -triH, triW, triH);
+			image(downflap_Imgs[GLOBAL_SWITCH_BIRD_INDEX], 0, -triH, triW, triH);
 		SecCounter++;
 	}
 	else
@@ -185,11 +198,11 @@ function draw() {
 
 		//image(bluebird_upflap_Img, 0, -triH, triW, triH);
 		if(SecCounter % (3 * gameSpeed) < gameSpeed)
-			image(bluebird_upflap_Img, 0, -triH, triW, triH);
+			image(upflap_Imgs[GLOBAL_SWITCH_BIRD_INDEX], 0, -triH, triW, triH);
 		else if(SecCounter % (3 * gameSpeed) < 2 * gameSpeed)
-			image(bluebird_midflap_Img, 0, -triH, triW, triH);
+			image(midflap_Imgs[GLOBAL_SWITCH_BIRD_INDEX], 0, -triH, triW, triH);
 		else
-			image(bluebird_downflap_Img, 0, -triH, triW, triH);
+			image(downflap_Imgs[GLOBAL_SWITCH_BIRD_INDEX], 0, -triH, triW, triH);
 		SecCounter++;
 
 	}
