@@ -1,18 +1,19 @@
 let cvsWrapper = null;
-let bgImg, baseImg, msgImg, bluebird_upflap_Img, gameoverImg;
+let bgImgs = [], baseImg, msgImg, bluebird_upflap_Img, gameoverImg, bgImg;
 let bg_x1, bg_x2, random1, random2, real_bg_x1, real_bg_x2;
 let x1, y1, g = 12 / 60, tapA = -4, delta_triAng = 0.015;
 let vScroll = 3, SecCounter = 0;
 let GameOverFlag = false, GameStartFlag = false, hitSoundFlag = false, pipe1_flag = true, pipe2_flag = false, GLOBAL_SWITCH_BIRD_FLAG = false;
-let GLOBAL_POINT_COUNTER = 0, GLOBAL_SWITCH_BIRD_INDEX = 0;
+let GLOBAL_POINT_COUNTER = 0, GLOBAL_SWITCH_BIRD_INDEX = Math.floor(Math.random() * 100) % 3, GLOBAL_BG_SWITCH_INDEX = Math.floor(Math.random() * 100) % 2;
 let gapWidth = 120, gameSpeed = 4, difficulty_seed = 0.6;
 var numImgs = [], upflap_Imgs = [], midflap_Imgs = [], downflap_Imgs = [];
 var wingSound, hitSound, dieSound, pointSound;
 // assets from: https://github.com/sourabhv/FlapPyBird/tree/master/assets
 
 function preload() {
+	bgImgs[0] = loadImage("assets/sprites/background-day.png");
 	bgImg = loadImage("assets/sprites/background-day.png");
-	bgImg_night = loadImage("assets/sprites/background-night.png");
+	bgImgs[1] = loadImage("assets/sprites/background-night.png");
 	baseImg = loadImage("assets/sprites/base.png");
 	msgImg = loadImage("assets/sprites/message.png");
 	gameoverImg = loadImage("assets/sprites/gameover.png");
@@ -118,8 +119,8 @@ function draw() {
 	}
 	if(GLOBAL_POINT_COUNTER % 10 < 5)
 	{
-		image(bgImg, real_bg_x1, 0,  width + 3,  bgImg.height * bgScale);
-		image(bgImg, real_bg_x2, 0,  width + 3,  bgImg.height * bgScale);
+		image(bgImgs[GLOBAL_BG_SWITCH_INDEX], real_bg_x1, 0,  width + 3,  bgImg.height * bgScale);
+		image(bgImgs[GLOBAL_BG_SWITCH_INDEX], real_bg_x2, 0,  width + 3,  bgImg.height * bgScale);
 		if(!GLOBAL_SWITCH_BIRD_FLAG)
 		{
 			GLOBAL_SWITCH_BIRD_INDEX = (GLOBAL_SWITCH_BIRD_INDEX  + 1) % 3;
@@ -129,8 +130,8 @@ function draw() {
 	else
 	{
 		GLOBAL_SWITCH_BIRD_FLAG = false;
-		image(bgImg_night, real_bg_x1, 0,  width + 3,  bgImg.height * bgScale);
-		image(bgImg_night, real_bg_x2, 0,  width + 3,  bgImg.height * bgScale);
+		image(bgImgs[(GLOBAL_BG_SWITCH_INDEX + 1) % 2], real_bg_x1, 0,  width + 3,  bgImg.height * bgScale);
+		image(bgImgs[(GLOBAL_BG_SWITCH_INDEX + 1) % 2], real_bg_x2, 0,  width + 3,  bgImg.height * bgScale);
 	}
 	
 	//image(numImgs, 0, 0);//testing
