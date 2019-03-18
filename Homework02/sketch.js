@@ -12,6 +12,7 @@ var wingSound, hitSound, dieSound, pointSound;
 
 function preload() {
 	bgImg = loadImage("assets/sprites/background-day.png");
+	bgImg_night = loadImage("assets/sprites/background-night.png");
 	baseImg = loadImage("assets/sprites/base.png");
 	msgImg = loadImage("assets/sprites/message.png");
 	gameoverImg = loadImage("assets/sprites/gameover.png");
@@ -25,10 +26,7 @@ function preload() {
 	dieSound = loadSound("assets/audio/die.wav");
 	hitSound = loadSound("assets/audio/hit.wav");
 	for(var i = 0; i < 10; i++)
-	{
 		numImgs[i] = loadImage(`assets/sprites/${i}.png`);
-		console.log(`assets/sprites/${i}.png`);
-	}
 }
 
 function setup() {
@@ -105,9 +103,17 @@ function draw() {
 		if(up_pipeImg.height + gapWidth + random2 > baseHeight || up_pipeImg.height + gapWidth + random2 + low_pipeImg.height < baseHeight)
 			random2 = 0;
 	}
-	image(bgImg, bg_x1, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
-	image(bgImg, bg_x2, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
-
+	if(GLOBAL_POINT_COUNTER % 10 < 5)
+	{
+		image(bgImg, bg_x1, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
+		image(bgImg, bg_x2, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
+	}
+	else
+	{
+		image(bgImg_night, bg_x1, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
+		image(bgImg_night, bg_x2, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
+	}
+	
 	//image(numImgs, 0, 0);//testing
 	if(GameStartFlag)
 	{
@@ -219,7 +225,7 @@ function keyPressed() {
 function parse_score(num)
 {
 	var number_buff = [];
-	console.log(num);
+	//console.log(num);
 	while(1 <= num)
 	{
 		number_buff.push(num % 10)
