@@ -109,7 +109,6 @@ function draw() {
 	image(bgImg, bg_x2, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
 
 	//image(numImgs, 0, 0);//testing
-	parse_score(GLOBAL_POINT_COUNTER);
 	if(GameStartFlag)
 	{
 		//draw the pipes!
@@ -139,18 +138,16 @@ function draw() {
 		if(bg_x1 < width / 2 && !pipe1_flag)
 		{
 			pipe1_flag = true;
-			GLOBAL_POINT_COUNTER++;
-			console.log(GLOBAL_POINT_COUNTER);
+			GLOBAL_POINT_COUNTER += 1;
 			pointSound.play();
 		}
 		if(bg_x2 < width / 2 && !pipe2_flag)
 		{
 			pipe2_flag = true;
-			GLOBAL_POINT_COUNTER++;
-			console.log(GLOBAL_POINT_COUNTER);
+			GLOBAL_POINT_COUNTER += 1;
 			pointSound.play();
 		}
-
+		parse_score(GLOBAL_POINT_COUNTER);
 		//birds behavior
 		vy += g;
 		x1 += vx;
@@ -221,5 +218,19 @@ function keyPressed() {
 
 function parse_score(num)
 {
-	image(numImgs[num % 10], 0, 0);
+	var number_buff = [];
+	console.log(num);
+	while(1 <= num)
+	{
+		number_buff.push(num % 10)
+		num  = Math.floor(num / 10);
+	}
+	//image(numImgs[number_buff[10]], numImgs[0].width * 2, 0);
+	//image(numImgs[number_buff[9]], numImgs[0].width, 0);
+	//image(numImgs[number_buff[8]], 0, 0);
+	if(number_buff.length == 0)
+		number_buff.push(0);
+	let first_digit_width = (width - number_buff.length * numImgs[0].width) / 2;
+	for(var i = number_buff.length - 1; i >= 0; i--)
+		image(numImgs[number_buff[number_buff.length - 1 - i]], first_digit_width + numImgs[0].width * i, 0.2 * height);
 }
