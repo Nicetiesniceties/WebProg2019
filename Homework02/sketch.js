@@ -3,8 +3,10 @@ let bgImg, baseImg, msgImg, bluebird_upflap_Img, gameoverImg;
 let bg_x1, bg_x2, random1, random2;
 let x1, y1, g = 12 / 60, tapA = -4, delta_triAng = 0.015;
 let vScroll, SecCounter = 0;
-let GameOverFlag = false, GameStartFlag = false, hitSoundFlag = false;
+let GameOverFlag = false, GameStartFlag = false, hitSoundFlag = false, pipe1_flag = true, pipe2_flag = false;
+let GLOBAL_POINT_COUNTER = 0;
 let gapWidth = 120, gameSpeed = 4, difficulty_seed = 0.6;
+var numImgs = [];
 var wingSound, hitSound, dieSound, pointSound;
 // assets from: https://github.com/sourabhv/FlapPyBird/tree/master/assets
 
@@ -22,6 +24,11 @@ function preload() {
 	pointSound = loadSound("assets/audio/point.wav");
 	dieSound = loadSound("assets/audio/die.wav");
 	hitSound = loadSound("assets/audio/hit.wav");
+	for(var i = 0; i < 10; i++)
+	{
+		numImgs[i] = loadImage(`assets/sprites/${i}.png`);
+		console.log(`assets/sprites/${i}.png`);
+	}
 }
 
 function setup() {
@@ -81,8 +88,10 @@ function draw() {
 	//scrolling the background
 	bg_x1 -= vScroll;
 	bg_x2 -= vScroll;
+	//re-generate the background!
 	if(bg_x1 <= -width)
 	{
+		pipe1_flag = false;
 		bg_x1 = width;
 		random1 = (0.5 - Math.random()) * 2 * difficulty_seed * width;
 		if(up_pipeImg.height + gapWidth + random1 > baseHeight ||  up_pipeImg.height + gapWidth + random1 + low_pipeImg.height < baseHeight)
@@ -90,6 +99,7 @@ function draw() {
 	}
 	if(bg_x2 <= -width)
 	{
+		pipe2_flag = false;
 		bg_x2 = width;
 		random2 = (0.5 - Math.random()) * 2 * difficulty_seed * width;
 		if(up_pipeImg.height + gapWidth + random2 > baseHeight || up_pipeImg.height + gapWidth + random2 + low_pipeImg.height < baseHeight)
@@ -97,6 +107,9 @@ function draw() {
 	}
 	image(bgImg, bg_x1, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
 	image(bgImg, bg_x2, 0,  bgImg.width * bgScale,  bgImg.height * bgScale);
+
+	//image(numImgs, 0, 0);//testing
+	parse_score(GLOBAL_POINT_COUNTER);
 	if(GameStartFlag)
 	{
 		//draw the pipes!
@@ -122,6 +135,22 @@ function draw() {
 	}
 	else
 	{
+		//add points
+		if(bg_x1 < width / 2 && !pipe1_flag)
+		{
+			pipe1_flag = true;
+			GLOBAL_POINT_COUNTER++;
+			console.log(GLOBAL_POINT_COUNTER);
+			pointSound.play();
+		}
+		if(bg_x2 < width / 2 && !pipe2_flag)
+		{
+			pipe2_flag = true;
+			GLOBAL_POINT_COUNTER++;
+			console.log(GLOBAL_POINT_COUNTER);
+			pointSound.play();
+		}
+
 		//birds behavior
 		vy += g;
 		x1 += vx;
@@ -177,6 +206,10 @@ function keyPressed() {
 		if(!GameStartFlag)
 		{
 			GameStartFlag = true;
+			if(bg_x1 < width / 2)
+				pipe1_flag = true;
+			if(bg_x2 < width / 2)
+				pipe2_flag = true;
 			random1 = random2 = 0;
 		}
 		wingSound.play();
@@ -184,4 +217,9 @@ function keyPressed() {
 		triAng = -PI / 4;
 		SecCounter = 0;
 	}
+}
+
+function parse_score(num)
+{
+	image(numImgs[num % 10], 0, 0);
 }
