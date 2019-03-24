@@ -1,0 +1,173 @@
+html {
+  background-image: url("./paper.png");
+}
+
+body {
+  padding: 1em;
+  margin: 2em auto;
+  max-width: 500px;
+  width: 80%;
+  padding-left: 5%;
+  padding-right: 5%;
+  font-family: 'Karla', sans-serif;
+  font-size: 0.8em;
+  background-color: rgb(255, 248, 239);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+  border-radius: 4px;
+}
+
+h1, h2, h3 {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+h4, h5, h6 {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 800;
+}
+
+img {
+  width: 100%;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+}
+
+p {
+  margin: 2em auto;
+}
+
+a {
+  font-weight: bold;
+  text-decoration-line: none;
+}
+
+a:link, a:visited {
+  color: rgb(50, 161, 87);
+}
+
+a:hover, a:active {
+  color: rgb(255, 155, 205);
+}
+
+blockquote {
+  font-family: 'Fjalla One', sans-serif;
+  font-size: 1.3em;
+  margin: 0 10%;
+}
+
+.crop {
+  width: 85%;
+  max-width: 400px;
+  margin: 2em 0;
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background-clip: padding-box;
+  background-image: url("./paper.png");
+  box-shadow: inset 0 0 12px #a7a7a7;
+  border-radius: 4px;
+}
+
+div.polaroid {
+  width: 85%;
+  max-width: 400px;
+  background-color: white;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 25px;
+  border-radius: 4px;
+}
+
+div.container {
+  text-align: center;
+  padding: 10px 10%;
+}
+
+input {
+  width: 45%;
+  box-sizing: border-box;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  font-size: 1em;
+  background-color: white;
+  background-image: url('./search.png');
+  background-size: 1.9em;
+  background-position: 3px 0px;
+  background-repeat: no-repeat;
+  padding: 5px 20px 5px 35px;
+  transition: width 0.5s;
+}
+
+input:focus {
+  width: 60%;
+}
+
+table {
+  width: 85%;
+  max-width: 400px;
+  margin: 2em 0;
+  text-align: center;
+  border-spacing: 5px;
+}
+
+table caption {
+  margin: 5px auto;
+}
+
+table th, table td {
+  background-clip: padding-box;
+  border-radius: 4px;
+}
+
+table th {
+  height: 4em;
+  background-color: rgba(187, 238, 221, 0.4);
+  transition: background-color 0.2s;
+}
+
+table th:hover {
+  background-color: rgb(180, 231, 213);
+}
+
+table td {
+  height: 3em;
+  background-color: rgba(255, 229, 187, 0.4);
+  transition: background-color 0.2s;
+}
+
+table td:hover {
+  background-color: rgb(253, 225, 180);
+}
+
+table caption {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1.2em;
+}
+
+ul, ol {
+  margin: 2em 0;
+}
+
+li {
+  padding: 0 10px;
+}
+
+.hilight {
+  display:inline-block;
+  position:relative;
+  z-index:0;
+  padding: 7px 10px 2px 0px;
+}
+
+.hilight:before {
+  content: "";
+  position: absolute;
+  z-index:-1;
+  top: 0;  left: 0;  right: 0;  bottom: 0;
+  background: #d120202d border-box;
+  border-radius: 4px;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform 0.2s;
+}
+.hilight:hover:before{
+  transform: scaleX(1);
+}
