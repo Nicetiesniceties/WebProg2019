@@ -1,12 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './styles.css';
-import ROOT from './containers/ROOT.js'
-import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(<ROOT />, document.getElementById('aaaaa'));
+import './style.css';
+import './reset.css';
+import CalcApp from './containers/CalcApp';
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// eslint
+ReactDOM.render(<CalcApp />, document.getElementById('root'));
