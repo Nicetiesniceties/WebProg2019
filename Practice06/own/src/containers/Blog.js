@@ -2,27 +2,11 @@ import React, { Component } from "react";
 import { NavLink, Switch, Route, Redirect } from "react-router-dom";
 import "../css/style.css"
 import HomeRender from "../components/HomeRender" 
+import ArticleRender from "../components/ArticleRender" 
 import Articles from "../containers/Articles" 
 export default class Blog extends Component {
     render() {
         return (
-            // <div>
-            //     <button>
-            //         <NavLink to="/home">Home</NavLink>
-            //     </button>
-            //     <button>
-            //         <NavLink to="/posts">Posts</NavLink>
-            //     </button>
-            //     <button>
-            //         <NavLink to="/authors">Authors</NavLink>
-            //     </button>
-            //     <hr />
-            //     {/* <Switch>
-            //         <Route exact path="/posts" component={Posts} />
-            //         <Route path="/posts/:id?" component={PostRender} />
-            //         <Redirect from="/home" to="/" />
-            //     </Switch> */}
-            // </div>
             <div>
                 <header id="fh5co-header" role="banner">
                     <nav class="navbar navbar-default" role="navigation">
@@ -30,11 +14,11 @@ export default class Blog extends Component {
                             <div class="row">
                                 <div class="col-md-10 col-md-offset-1">
                                     <div class="navbar-header"> 
-                                    <a class="navbar-brand" href=""><NavLink to="/home">IBlog</NavLink> </a>
+                                        <NavLink to="/home" class="navbar-brand">IBlog</NavLink>
                                     </div>
                                     <div id="fh5co-navbar">
                                         <ul class="nav navbar-nav navbar-right">
-                                            <li class="active"><a href=""><span><NavLink to="/home">Home</NavLink> <span class="border"></span></span></a></li>
+                                            <li><a href=""><span><NavLink to="/home">Home</NavLink> <span class="border"></span></span></a></li>
                                             <li><a href=""><span><NavLink to="/articles">Articles</NavLink> <span class="border"></span></span></a></li>
                                         </ul>
                                     </div>
@@ -47,7 +31,7 @@ export default class Blog extends Component {
                 {/* <!-- END .header --> */}
                 <Switch>
                     <Route exact path="/articles" component={Articles} />
-                    {/*<Route path="/articles/:id?" component={ArticleRender} /> */}
+                    <Route path="/articles/:id?" component={ArticleRender} />
                     <Route path="/home" component={HomeRender} />
                     <Redirect from="/" to="/home" />
                 </Switch>

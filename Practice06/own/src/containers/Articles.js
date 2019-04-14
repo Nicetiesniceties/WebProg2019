@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import "../css/style.css"
 import "../css/animate.css"
+import { NavLink } from "react-router-dom";
 function articleObj(title, content, image) {
   this.title = title;
   this.content = content;
@@ -39,7 +40,9 @@ class Articles extends Component {
               <div class="fh5co-portfolio-description">
                 <h2> {e.title}</h2>
                 <p>{e.content}</p>
-                <p><a href="#" class="btn btn-primary">Read the casestudy</a></p>
+                <p><a key={article_list.indexOf(e)}>
+                <NavLink to={"/Articles/" + article_list.indexOf(e)} class="btn btn-primary">Read the Casestudy</NavLink>
+                </a></p>
               </div>
             </div>  
           )}
