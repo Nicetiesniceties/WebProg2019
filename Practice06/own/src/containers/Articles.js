@@ -30,7 +30,7 @@ class Articles extends Component {
             </div>
         </div>
 
-        <div class = "fh5co-portfolio">
+        <div id = "fh5co-portfolio">
           {article_list.map(e => 
             <div class={"fh5co-portfolio-item" + 
               ((article_list.indexOf(e) % 2 == 0) ? (" fh5co-img-right"): (""))}>
