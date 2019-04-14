@@ -49,7 +49,7 @@ export default class Blog extends Component {
                     <Route exact path="/articles" component={Articles} />
                     {/*<Route path="/articles/:id?" component={ArticleRender} /> */}
                     <Route path="/home" component={HomeRender} />
-                    <Redirect from="/home" to="/" />
+                    <Redirect from="/" to="/home" />
                 </Switch>
 
                 <footer id="fh5co-footer">
