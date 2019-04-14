@@ -13,7 +13,6 @@ export default ({person, info}) => {
 							<h4 className="font-white">{person.discription}</h4>
 							<ul className="information margin-tb-30">
 								{Object.keys(info).map((key, index) => (<li className="font-white"><b className="font-black">{key} : </b>{info[key]}</li>))}
-								<li className="font-white"><b className="font-black">Author : </b>台大加簽王</li>
 							</ul>
 						</div>
 					</div>
