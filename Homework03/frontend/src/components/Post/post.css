@@ -1,0 +1,59 @@
+.bigcar {
+	display: block;
+    box-shadow: 0 12px 12px rgba(0,0,0,0.3);
+    margin: 0.5em;
+	padding: 2em;
+	background: #fff;
+    border-radius: 4px;
+    .bigcar-title {
+        margin: 0;
+        font-size: 16px;
+    }
+}
+.post-container{
+    max-height: 300px;
+    overflow: auto;
+}
+.car {
+    display: block;
+    width: 80%;
+    box-shadow: 0 12px 12px rgba(0,0,0,0.3);
+    margin: 0.5em;
+	padding: 2em;
+	background: #fff;
+    border-radius: 4px;
+    position: relative;
+    left: 10%;
+
+	.car-header {
+		.car-title {
+			margin: 0;
+			font-size: 16px;
+		}
+	}
+	.car-body {
+			margin: 0;
+		.car-content {
+			line-height: 20px;
+		}
+	}
+	.car-footer {
+		text-align: right;
+		margin: .2em 0 0 0;
+		.car-button {
+			font-weight: lighter;									
+			color: #bcadd6;
+			padding:  .5em 1em;
+			border-radius: 8px;
+			font-size: 16px;
+			text-decoration: none;
+			&:hover {
+				color: darken(#ae9ccd, 5)
+			}
+		}
+	}
+}
+
+.car {
+	margin-right: 10px;
+}
